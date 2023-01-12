@@ -1,0 +1,84 @@
+# coding: utf-8
+
+import string
+import os
+from tkinter import *
+from tkinter.filedialog import *
+
+window = Tk()
+frame = Frame(window, bg='#2B2D42')
+bg_frame = Frame(frame, bg='#2B2D42')
+
+def windows(frame):
+
+
+    window.title("Anonymail")
+    window.geometry("300x300")
+    window.minsize(720, 480)
+    window.maxsize(1080, 720)
+    window.iconbitmap("iceberg.ico")
+    window.config(background='#2B2D42')
+    #creer titre
+    label_title = Label(frame, text="Anonymail", font=("Arial", 40), bg='#2B2D42', fg='#FFFFFF')
+    label_title.grid(row=0, column=0, sticky=N)
+    #image
+    width = 300
+    height = 300
+    image = PhotoImage(file="mail.png").zoom(19).subsample(30)
+    canvas = Canvas(window, width=width/2, height=height/2, bg='#2B2D42', bd=4, highlightthickness=0)
+    canvas.create_image(width, height, image=image)
+    #canvas.grid(row=2, column=0, sticky=W)
+
+    label_subtitle = Label(frame, text="anonyme sender by email ", font=("Arial", 18), bg='#2B2D42', fg='#FFFFFF')
+    label_subtitle.grid(row=1, column=0, sticky=N)
+
+    return
+
+def verifie_email():
+    #read = mail_entry.get()
+    print("l'email est ok")
+
+def object():
+    #read = mail_entry.get()
+    print("object join ok")
+
+def send():
+    #read = mail_entry.get()
+    print("email à été envoyer")
+
+def join_object():
+    filepath = askopenfilename(title="Ouvrir une fichier", filetypes=[('png files', '.png'), ('all files', '.*')])
+    photo = PhotoImage(file=filepath)
+    canvas = Canvas(frame, width=photo.width(), height=photo.height(), bg="yellow")
+    #canvas.create_image(0, 0, anchor=NW, image=photo)
+
+def page(frame):
+    mail_entry_sender = Entry(frame, font=("Arial", 20), bg='#2B2D42', fg='#FFFFFF')
+    mail_entry_sender.insert(0, "Email sender")
+    mail_entry_sender.grid(row=3, column=0, sticky=W)
+    verify = Button(frame, text="Verify email", font=("Arial", 20), bg='#2B2D42', fg='#000000', command=verifie_email)
+    verify.grid(row=3, column=1, sticky=W)
+
+    mail_entry_receiver = Entry(frame, font=("Arial", 20), bg='#2B2D42', fg='#FFFFFF')
+    mail_entry_receiver.insert(0, "Email receiver")
+    mail_entry_receiver.grid(row=4, column=0, sticky=W)
+    verify = Button(frame, text="Verify email", font=("Arial", 20), bg='#2B2D42', fg='#000000', command=verifie_email)
+    verify.grid(row=4, column=1, sticky=W)
+
+    object_sender = Entry(frame, font=("Arial", 20), bg='#2B2D42', fg='#FFFFFF')
+    object_sender.insert(0, "Objet")
+    object_sender.grid(row=5, column=0, sticky=W)
+    link_object = Button(frame, text="Join object", font=("Arial", 20), bg='#2B2D42', fg='#000000', command=join_object)
+    link_object.grid(row=5, column=1, sticky=W)
+
+    text_box = Text(frame, font=("Arial", 20), bg='#2B2D42', fg='#FFFFFF', height=12, width=40)
+    text_box.grid(row=6, column=0, sticky=W)
+    sender = Button(frame, text="Send email", font=("Arial", 20), bg='#2B2D42', fg='#000000', command=send)
+    sender.grid(row=6, column=1, sticky=W)
+
+
+windows(frame)
+page(frame)
+frame.grid()
+bg_frame.grid()
+window.mainloop()
